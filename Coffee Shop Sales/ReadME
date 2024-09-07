@@ -1,1 +1,58 @@
-Coffee Shop Sales
+OVERVIEW
+In this project, I transformed a Coffee shop sales dataset into an dynamic dashboard in Microsoft Excel. This dashboard enables users to analyze and extract insights from data covering January to June to better assist the business. I utilized Excel's PowerQuery for data import and levereaged Excel's visualization tools to create the dynamic dashboard.
+
+CLEANING/TRANSFORMATION
+1. Created a new revenue column from the unit_price and transaction_qty column
+2. Calculated four new columns based on the transaction_date column; Month ( =MONTH() ), Weekday ( =WEEKDAY( ,2) ), Month Name ( =TEXT( ,"mmm") ), and Weekday Name ( =TEXT( ,"ddd") )
+3. Using transaction_time column, created an hour column utilizing the =HOUR() function
+
+PIVOT TABLES
+Created Pivot Tables to explore the data
+- Revenue by Month
+- # of transactions by hour and day of the week
+- # of transactions by product category
+
+DESCRIPTIVE STATISTICS FOR ALL STORES
+- Brewed Chai Tea most successful product
+- Coffee most successful product category
+- June had the highest revenue at $166,486 
+- February had the lowest revenue at $76,145
+- Morning hours starting at 7am and ending at 10am were the peak for transactions in all stores
+- Monday, Thursday and Friday were the highest selling days in all stores
+
+ASTORIA
+- Brewed Chai Tea most successful product
+- Coffee most successful product category
+- June had the highest revenue at $55,083
+- February had the lowest revenue at $25,105
+- 10am was the peak for transactions in Astoria
+- Thursday was the peak for transactions in Astoria
+
+HELL'S KITCHEN
+- Barista Espresso most successful product
+- Coffee most successful product category
+- June had the highest revenue at $56,957
+- February had the lowest revenue at $25,720
+- Peak transaction hours from 8am to 10am
+- Most popular days are Tuesday and Friday
+
+LOWER MANHATTAN
+- Barista Espresso most successful product
+- Cofee most successful product category
+- June had the highest revenue at $54,446
+- February had the lowest revenue at $25,320
+- 7am to 10am were the peak for transactions in Lower Manhattan
+- Monday was far and away the most popular day
+ 
+KEY METRICS
+- Highest Revenue month
+- Revenue trend 
+- Hour with the most transactions
+- Most successful product by transaction amount and revenue
+- Highest selling product category
+- Trend of transactions throughout the week
+
+RECOMMENDATIONS
+- Analyze trends and insights for the slow start to the year (January to March). Further analyze how to maximize profits in the highest revenue months, May and June. 
+- Look into adopting Astoria's 7am to 7pm schedule. Hell's Kitchen has the lowest amount of sales at 8pm, only completing 528 transactions across a six month period. Consider closing the Lower Manhattan store two hours earlier as there are only a combined 200 total transactions during these hours. Look at offering promotions and deals to boost profits at these popular hours.
+- Analyze pricing of branded merchandise. Understanding the factors behind selling fewer than 1000 items can help increase profits and spread the reach of the brand.
