@@ -1,5 +1,6 @@
 OVERVIEW:
-This project involves a financial analysis of a fitness company's revenues and expenses. I cleaned and manipulated the data in PowerQuery before importing it into PowerBI to derive meaningful insights from the data. The following is an outline of the steps I took.
+This project involves a financial analysis of a fitness company's revenues and expenses. I cleaned and manipulated the data in PowerQuery before importing it into PowerBI to derive meaningful insights from the data. 
+The following is an outline of the steps I took.
 
 CLEANING:
 - Data Separation: Created a separate expense and revenue column from the original amount column.
