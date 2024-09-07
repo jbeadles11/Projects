@@ -1,3 +1,72 @@
 OVERVIEW:
-  This project involves a financial analysis of a fitness company's revenues and expenses. I cleaned and manipulated the data in PowerQuery before importing it into PowerBI to derive meaningful insights from the data. The following is an outline of the steps I took.
+This project involves a financial analysis of a fitness company's revenues and expenses. I cleaned and manipulated the data in PowerQuery before importing it into PowerBI to derive meaningful insights from the data. The following is an outline of the steps I took.
+
 CLEANING:
+- Data Separation: Created a separate expense and revenue column from the original amount column.
+- Data Removal: Deleted the month sequence column, due to repetitiveness in the original dataset.
+- Null Values: All zero values in the newly created expense and revenue columns were replaced with nulls to allow for easier analysis within these columns.
+
+DATA IMPORT PROCESS
+1. Took the cleaned dataset from Microsoft Excel and exported it to be ready for import into PowerBI.
+2. Utilized "Import data from Excel option"
+3. Double-checked the imported data to certify it was the right dataset. 
+
+MANIPULATION IN POWERBI:
+Created measures/filtered measures for: 
+- Gross Profit (Revenue - COGS Expense)
+- Net Profit (Revenue - Expense)
+- EBIT (Revenue - OPEX and COGS expense)
+- Revenue MoM%
+- Cost of Goods Sold Expense
+- Interest and Tax Expense
+- Operating Expenses Expense
+Measures for Visualization purposes:
+For certain visualizations, I utilized the absolute value of some measures to be better represented in graphs:
+- Absolute Cost of Goods Sold
+- Absolute Expenses
+- Absolute Interest and Tax
+- Absolute Operating Expense
+
+
+REVENUE GROUPS:
+- Sales
+- Other Income
+- Consulting and Professional Services
+
+EXPENSE GROUPS:
+- Cost of Goods Sold (COGS): Labor, Materials, Other, Packaging, Shipping
+- Operating Expenses (OPEX): Equipment, Marketing, Other, Payroll, Rent, Research and Development (R&D)
+- Interest and Tax
+
+BUSINESS LINES:
+- Sportswear
+- Nutrition and Food Supplements
+- Sports Equipment
+
+DESCRIPTIVE STATISTICS:
+- January: Highest Revenue at 1.95M and highest net profit at 0.7M
+- September: Lowest Revenue at 1.1M and lowest net profit at 0.1M
+- Sports Equipment: Highest revenue at close to 9.0M
+- Nutrition and Food Supplements: Negative net profit of -0.7M
+- Sportswear: Highest net profit of $2.74M
+- Total Revenue: 17.6M
+- Total Expense: -13.2M
+- Gross Profit: 10.8M
+- Net Profit: 4.3M
+- COGS: -6.7M
+- OPEX: -5.6M
+- Interest and Tax: -0.9M
+- EBIT: 5.2M
+
+
+KEY METRICS TO EVALUATE:
+- Highest Revenue Month
+- Lowest Revenue Month
+- Biggest MoM % Change in Revenue
+- Most profitable business line
+- Least profitable business line
+- How are expenses allocated across expense subgroups and across business lines?
+- How is the revenue split up among our business lines?
+- How is our gross profit distributed across our business lines? How about net profit?
+- Which business line accounts for most of our net profit?
+- Which business line accounts for most of our expenses?
