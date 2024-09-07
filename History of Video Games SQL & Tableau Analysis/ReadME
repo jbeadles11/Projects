@@ -1,2 +1,18 @@
-SQL and Tableau Analysis on the History of Video Games LINK TO ARTICLE AND SQL ANALYSIS: https://medium.com/@joebeadles1/analysis-on-history-of-video-games-sql-and-interactive-tableau-dashboard-6156064fc340
+OVERVIEW:
+Developing SQL queries to analyze a video game dataset from 1978 to 2020 and designing a dynamic dashboard to develop valuable insights. 
+
+CLEANING
+- Replaced all null values with a 0 in the critic_score and user_score columns as they hold DOUBLE values using Excel PowerQuery
+- Created a smaller table of 1000 rows from the original dataset
+
+IMPORT
+- Utilized MySQL Data Import Wizard to import the dataset
+
+KEY METRICS
+- Highest selling and rated year
+- Highest selling games per year
+- Highest rated year based on critic and user scores
+- Game genre trends
+
+LINK TO ARTICLE AND SQL ANALYSIS: https://medium.com/@joebeadles1/analysis-on-history-of-video-games-sql-and-interactive-tableau-dashboard-6156064fc340
 
