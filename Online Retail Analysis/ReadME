@@ -1,0 +1,253 @@
+Online Retail Analysis 2023-2024:
+- Data was taken from Kaggle (https://www.kaggle.com/datasets/bhavikjikadara/retail-transactional-dataset)
+
+Insights: 
+The order period was 4pm to 7pm with the medium income group making up nearly 84% of our revenue. December 2023 was our highest sales month, generating 1.23M in revenue. In contrast, February 2023 recorded the least amount of revenue generated at 380k. There was limited data in 2024 compared to 2023, with majority of our revenue being generated in 2023. 
+
+Most of our consumers were between the ages of 18-24. The highest MoM% change for revenue occurred from February to March 2023, with a remarkable 176.07% increase from the previous month. Our lowest MoM% change was February 2024 to March 2024, showing an -88.51% decrease in generated revenue. 
+
+In both years, Groceries were the top-selling product category. Furthermore, spending habits differed between income groups. The medium income group spent more money in groceries, home decor, and books while the high income group spent their money majority in electronics, groceries, and clothing. The low income group made up just around 1.6% of purchases. Payment methods were evenly distributed, with debit cards being the most common option among the medium and high income groups. 
+
+Recommendations:
+
+
+Questions to be asked:
+What income group is spending the most money?
+When are the peak purchasing hours for our consumers?
+What are the most common methods of payments for our consumers and which income groups do they belong to?
+What are our overall trends in the data?
+
+1. Create a database named retail_data in SQL Server
+
+2. Import the data into SQL Server
+
+3. Use SELECT * FROM retail_data to get an overall view of our dataset
+
+Data Cleaning
+4. Create a backup copy of the table by duplicating it
+5. Identified phone and email columns to be dropped
+- ALTER TABLE dbo.retail_data DROP COLUMN phone
+- ALTER TABLE dbo.retail_data DROP COLUMN email
+
+6. Rounding columns
+- UPDATE retail_data SET amount = ROUND(amount, 2)
+- UPDATE retail_data SET total_amount = ROUND(total_amount, 2)
+
+7. Check for duplicates
+- No primary key resides in our dataset. Can check for potential repeats in transaction_id.
+- SELECT transaction_id, COUNT(*) FROM retail_data GROUP BY transaction_id HAVING COUNT(*) > 1
+- There are a combination of duplicates and also different transcations with the same transaction_id. I chose to drop these rows to not risk using duplicate transactions in our analysis.
+- DELETE FROM retail_data WHERE transaction_id IN (SELECT transaction_id, COUNT(*) FROM retail_data GROUP BY transaction_id HAVING COUNT(*) > 1)
+
+8. Null Values
+- We have important null values in the Year, Month, and time columns that can be fixed by using other revelant columns
+- Year:
+UPDATE [retail_data].[dbo].[retail_data] SET Year = Year(Date) WHERE Year IS NULL
+Month:
+UPDATE retail_data SET Month = Month(Date) WHERE Month IS NULL
+After changing these values to integer, I used Datename to change the integer months to name. 
+UPDATE [retail_data].[dbo].[retail_data] SET Month = DATENAME(mm,GETDATE()) WHERE Month LIKE '[%1-12%]'
+Null values in other categories changed in PowerBI:
+Product Category -> Changed to NA
+Gender -> Changed to NA
+Payment Method -> Changed to Unknown
+
+9. Temporary Table
+- Due to our dataset being so large at 287,703 rows, we will use a temporary table to extract 10,000 random rows of data. We will name this customer_data
+with customer_data as 
+(SELECT TOP 10000 * 
+ FROM retail_data 
+ ORDER BY RAND())
+
+10. Descriptives
+- Now that we have a cleaned and randomized portion of the dataset, we can take a closer look at the trends
+
+TIME FRAME:
+SELECT MIN(date), MAX(date)
+FROM customer_data
+
+Minimum: 2023-01-03
+Maximum: 2024-12-02
+
+SELECT COUNT(*), Year
+FROM customer_data
+GROUP BY Year
+
+By running this query, we can see that 83% of our transactions are from 2023 and 17% are from 2024.
+
+TOTAL REVENUE:
+SELECT SUM(Total_amount)
+FROM customer_data
+- 13,709,548.78
+
+TOTAL ITEMS SOLD:
+SELECT SUM(total purchases)
+FROM customer_data
+- 53,837
+
+LEAST AND MOST EXPENSIVE TRANSACTION:
+SELECT MIN(total_amount), MAX(total_amount)
+FROM customer_data
+
+Least: 10.98
+Most: 4999.63
+
+MONTHLY GENERATED REVENUE:
+SELECT SUM(Total_Amount) AS total_revenue, month
+FROM customer_data
+GROUP BY month
+ORDER BY total_revenue DESC
+
+total_revenue	month
+1,242,270.22	December
+1,218,090.78	January
+1,186,929.59	May
+1,168,147.43	August
+1,163,166.47	March
+1,158,273.82	April
+1,124,261.2	July
+1,102,414.54	November
+1,099,503.38	February
+1,084,791.3	September
+1,082,198.17	October
+1,079,501.88	June
+
+December is our highest revenue month while June is our lowest month for revenue.
+
+LOCATION:
+
+SELECT SUM(total_amount) AS revenue, Country
+FROM customer_data
+GROUP BY Country
+ORDER BY revenue DESC
+
+UK: 13,697,549.8
+Australia: 4,879.31
+Germany: 4,022.7
+Canada: 3096.96
+
+Majority of our consumers are ordering from the United Kingdom while there is a small minority of consumers located in Australia, Germany and Canada. Additionally, Germany, Canada, and Australia only account for 7 transactions in our dataset of 10,000
+
+TREND FOR 2023?
+- Add WHERE Year = '2023'
+
+UK: 11,380,210.66
+Australia: 4,022.7
+Germany: 3,096.97
+Canada: 2248.6
+
+GENDER:
+
+SELECT COUNT(*), Gender
+FROM customer_data
+GROUP BY gender
+
+Here we can see that around 60% of our consumers are male leaving the other 40% female. Is there a difference in purchasing history between our demographic?
+
+SELECT SUM(total_purchases) AS qty, Gender
+FROM customer_data
+GROUP BY Gender
+
+This query allows us to see the difference in items purchased between our male and female population. Similar to the gender split, our male populations makes up more than 50% of items purchased. 
+
+How about Revenue?
+
+SELECT ROUND(SUM(Total_Amount)/SUM(total_purchases), 2) AS qty, Gender
+FROM customer_data
+GROUP BY Gender
+
+Male: 255.66
+Female: 253.11
+
+However, this shows that despite purchasing more items, the average revenue is nearly identical. 
+
+BUSIEST TIMES FOR CONSUMERS:
+
+SELECT COUNT(*) AS qty, time_day
+FROM (SELECT
+	CASE
+		WHEN time BETWEEN '05:00:00' AND '10:59:59' THEN 'Morning'
+		WHEN time BETWEEN '11:00:00' AND '15:59:59' THEN 'Afternoon'
+		WHEN time BETWEEN '16:00:00' AND '23:59:59' THEN 'Evening'
+		ELSE 'Night'
+	END AS time_day
+	FROM customer_data) time_of_day_groups
+GROUP BY time_day
+ORDER BY qty DESC
+
+QTY	TIME_DAY
+
+3284	Evening
+2467	Morning
+2147	Night
+2102	Afternoon
+
+The times when people are asleep and/or at work (Night and Afternoon) generate the least amount of revenue. In contrast, evening (when people are off work and have free time) has the highest peak items purchased at 3284. Is there a peak hour in this time slot?
+
+
+SELECT COUNT(*) AS qty, time_day
+FROM (SELECT
+	CASE
+		WHEN time BETWEEN '16:00:00' AND '16:59:59' THEN '4pm'
+		WHEN time BETWEEN '17:00:00' AND '17:59:59' THEN '5pm'
+		WHEN time BETWEEN '18:00:00' AND '18:59:59' THEN '6pm'
+		WHEN time BETWEEN '19:00:00' AND '19:59:59' THEN '7pm'
+		WHEN time BETWEEN '20:00:00' AND '20:59:59' THEN '8pm'
+		WHEN time BETWEEN '21:00:00' AND '21:59:59' THEN '9pm'
+		WHEN time BETWEEN '22:00:00' AND '22:59:59' THEN '10pm'
+		WHEN time BETWEEN '23:00:00' AND '23:59:59' THEN '11pm'
+		ELSE 'Not Evening'
+	END AS time_day
+	FROM customer_data) time_of_day_groups
+GROUP BY time_day
+ORDER BY qty DESC
+
+qty	time_day
+6711	Not Evening
+429	6pm
+428	5pm
+428	7pm
+419	4pm
+409	11pm
+401	9pm
+393	10pm
+382	8pm
+
+There is a peak period from 4-7pm which sees the highest number of items being sold in the Evening time frame.
+
+AGE DISTRIBUTION:
+
+SELECT COUNT(*) AS qty, age_groups
+FROM (SELECT
+	CASE
+		WHEN Age BETWEEN '18' AND '25' THEN 'Young Adult'
+		WHEN Age BETWEEN '26' AND '39' THEN 'Adult'
+		WHEN Age BETWEEN '40' AND '59' THEN 'Middle-Aged'
+		ELSE 'Old Adults'
+	END AS age_groups
+	FROM customer_data) time_of_day_groups
+GROUP BY age_groups
+ORDER BY qty DESC
+
+qty	age_groups
+
+9254	Young Adult
+342	Middle-Aged
+223	Adul
+181	Old Adults
+
+An overwhelming majority of our consumers would be classified as young adults, making up nearly 93% of our consumers. 
+
+Now that we have done our descriptives, we can import it into PowerBI to extract insights and create a dashboard.
+I used this query to import the temporary table that I had been working on:
+WITH customer_data AS
+(SELECT TOP 10000 *
+FROM [retail_data].[dbo].[retail_data]
+ORDER BY RAND())
+
+SELECT *
+FROM customer_Data
+
+Thank you for reading!
+
+
