@@ -3,7 +3,7 @@ This project involves a financial analysis of a fitness company's revenues and e
 The following is an outline of the steps I took.
 
 CLEANING:
-- Data Separation: Created a separate expense and revenue column from the original amount column.
+- Data Separation: Created a separate expense and revenue column from the original amount column. I did this by verifying if the value in the amount was identified as an expense or revenue in the "Revenue or Expense" column.
 - Data Removal: Deleted the month sequence column, due to repetitiveness in the original dataset.
 - Null Values: All zero values in the newly created expense and revenue columns were replaced with nulls to allow for easier analysis within these columns.
 
