@@ -1,0 +1,22 @@
+DATA CLEANING PROJECT: Utilizing a Nashville Housing Dataset
+
+STEPS:
+1. Standardizing Date Column
+2. Filling Null Address Cells with connected columns
+3. Splitting PropertyAddress and OwnerAddress Columns into individual columns
+4. Change 'Y' and 'N' values to 'Yes' and 'No'
+5. Removing Duplicates
+6. Dropping unused columns
+
+
+STANDARDIZING DATE COLUMN
+
+FILL NULL ADDRESSES
+
+SPLITTING PROPERTYADDRESS AND OWNERADDRESS INTO INDIVIDUAL COLUMNS
+
+CHANGING 'Y' AND 'N' TO 'YES' AND 'NO'
+
+REMOVING DUPLICATES
+
+DROPPING UNUSED COLUMNS
