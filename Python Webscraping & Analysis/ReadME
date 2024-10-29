@@ -1,2 +1,33 @@
 Webscraping and Analyzing Premier League data (2021-2024)
+(Educational purposes only)
+In this project, I webscraped premier league data from fbref.com for an educational analysis. I webscraped three individual pages using BeautifulSoup and exported them in a csv format.
+After doing this, I combined all three dataframes into one in python for an analysis.
+
+During the analysis I took these steps:
+- Analyzed size, columns, and datatypes of the dataframe
+- Created a converted date column off the original date column to change the datatype
+- Extracted the year from the converted date column
+- Used str.split() to separate actual home and away scores in our dataset
+- Checked for null values
+- Populated null values with the correct value
+- Created an overall average xG_H and xG_A value
+- Created a histogram for home and away xG distribution
+- Created a histogram to look at the distribution of stadium attendance
+- Created a countplot to analyze how many games each of our referees was apart of
+- Analyzed correlations between xG_H, xG_A, and Attendance
+- Analyzed each team's home, away, and overall xG
+  - Further analyzed it by creating values per each year in the dataset
+- Created a stripplot to analyze distribution of each team's home and away xG
+- Analyzed which teams created the most chances at home, away and overall in our dataset
+- Plotted these teams to visualize who performed the best
+- Analyzed which teams performed better at home and which teams performed better away
+- Analyzed overperformance and underperformance by using the actual scores of the game.
+
+Conclusions:
+- Home xG had much higher instances than away xG, the home teams were able to create very high xG numbers on more occassions than the visitors.
+- On average, the home teams created nearly a half goal more than their opponents. Teams playing away from home accounted for on average 1.27 xG compared to the home team creating 1.60 xG. Most teams performed better at home except for two, Leicester City and Watford.
+- Liverpool and Manchester City created the highest total xG at 248.0 and 247.8 respectfully. Attendance did not seem to have any correlation with higher amounts of xG_H or lower amounts of xG_A.
+- Manchester City and Liverpool on average had both the highest home and away xG stats whereas Arsenal had the highest overall xG. Despite an xG overperformance, Manchester City and Arsenal were still at the top echelon of clubs in the premier league, whereas Luton Town's 1.23 overperformance saw them be relegated.
+
+
 
