@@ -1,33 +1,38 @@
 Webscraping and Analyzing Premier League data (2021-2024)
 (Educational purposes only)
-In this project, I webscraped premier league data from fbref.com for an educational analysis. I webscraped three individual pages using BeautifulSoup and exported them in a csv format.
-After doing this, I combined all three dataframes into one in python for an analysis.
 
-During the analysis I took these steps:
-- Analyzed size, columns, and datatypes of the dataframe
+OVERVIEW
+This project focuses on web scraping and analysis of Premier League data (2021-2024). The data was scraped from fbref.com and contains a various match performance values.
+I used BeautifulSoup to web scrape three separate web pages which were then exported into csv format for analysis.
+
+DATA PREPARATION
+- Combined three separate dataframes into one single dataframe
+- Analyzed the size, columns, and data types of the dataframe
+- Created a new data column by converting the original date format into a time-based datatype.
+- Extracted the year from the converted date column
 - Created a converted date column off the original date column to change the datatype
 - Extracted the year from the converted date column
-- Used str.split() to separate actual home and away scores in our dataset
-- Checked for null values
-- Populated null values with the correct value
-- Created an overall average xG_H and xG_A value
-- Created a histogram for home and away xG distribution
-- Created a histogram to look at the distribution of stadium attendance
-- Created a countplot to analyze how many games each of our referees was apart of
-- Analyzed correlations between xG_H, xG_A, and Attendance
-- Analyzed each team's home, away, and overall xG
-  - Further analyzed it by creating values per each year in the dataset
-- Created a stripplot to analyze distribution of each team's home and away xG
-- Analyzed which teams created the most chances at home, away and overall in our dataset
-- Plotted these teams to visualize who performed the best
-- Analyzed which teams performed better at home and which teams performed better away
-- Analyzed overperformance and underperformance by using the actual scores of the game.
+- Used str.split() to separate home and away scores from the 'Score' column
+- Checked for null values and populated them with the relevant values
 
-Conclusions:
-- Home xG had much higher instances than away xG, the home teams were able to create very high xG numbers on more occassions than the visitors.
-- On average, the home teams created nearly a half goal more than their opponents. Teams playing away from home accounted for on average 1.27 xG compared to the home team creating 1.60 xG. Most teams performed better at home except for two, Leicester City and Watford.
-- Liverpool and Manchester City created the highest total xG at 248.0 and 247.8 respectfully. Attendance did not seem to have any correlation with higher amounts of xG_H or lower amounts of xG_A.
-- Manchester City and Liverpool on average had both the highest home and away xG stats whereas Arsenal had the highest overall xG. Despite an xG overperformance, Manchester City and Arsenal were still at the top echelon of clubs in the premier league, whereas Luton Town's 1.23 overperformance saw them be relegated.
+ANALYSIS
+- Computed overall averages for home and away expected goals
+- Created a histogram to visualize home and away xG distribution as well as stadium attendance
+- Developed a countplot to visualize referee involvement in the games
+- Analyzed correlations between xG_H, xG_A, and Attendance
+- Evaluated each team's home, away, and overall xG further grouping this by year in the dataset
+- Generated stripplots to visualize distribution of home and away xG for each team
+- Identified teams that created the most chances at home, away and overall
+- Analyzed teams' performance at home vs. away and assessed if teams overperformed or underperformed utilizing actual match scores from the dataset
+
+CONCLUSIONS
+- Home teams exhibited higher xG figures compared to away teams, with home teams creating 1.60 xG compared to away teams creating 1.27 xG.
+- Overall, teams performed better at home, with the exception of Leicester City and Watford.
+- Liverpool and Manchester City led in total xG, with values of 248.0 and 247.8. 
+- It is important to note that, attendance did not have any correlation with higher xG_H or lower xG_A.
+- Manchester City and Liverpool consistently recorded the highest home xG and away xG, while Arsenal had the highest overall average xG. 
+- Despite an xG overperformance, Manchester City and Arsenal remained among the top clubs in the Premier League. 
+- In contrast, Luton Town's 1.23 xG overperformance resulted in them being relegated.
 
 
 
