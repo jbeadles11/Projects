@@ -1,1 +1,52 @@
+Kaggle Dataset: (https://www.kaggle.com/datasets/ulrikthygepedersen/online-retail-dataset)
 
+Qbjective: Identify customer groups and provide ad/incentive recommendations based on the customer's behavior
+
+Process:
+
+Cleaning- Dropped null values, dropped duplicates, converted columns into the correct datatype, identified negative values in the Quantity and Unit Price columns, identified and dropped outlier datapoints.
+
+Transformation- Created a Time, Date, and Year column, created a revenue column, undersampled the data to create a balanced and fair dataset (utilized the Year column to identify the distribution in Invoices from each year).
+
+EDA- Explored and visualized yearly revenue, transactions per year, purchases by country, best selling products, and Unit Price vs. Quantity
+
+RFM- 
+- Grouped customers by their last purchase (subtracted from the max purchase of the dataset), number of transactions, and sum of total revenue. These served as the recency, frequency, and monetary values in our RFM model.
+
+- Scored the customers on a scale of 1-5 based on their recency, frequency, and monetary values. 
+
+- Segmented the customers into seven customer groups based on their scores: At Risk Customers, Lost Customers, Loyal Customers, Potential Loyal Customers, Recent Customers, Top Customers, and Other Customers.
+
+- Analyzed and visualized the segments finding that:
+
+# At Risk Customers: We have 15 customers in this group, with an average recency of 1.53 days (indicating they recently purchased). However, they had infrequent buying behavior, averaging 3.4 purchases and further have a moderate spending average of $29.89.
+
+# Lost Customers: There were only 3 customers in this group, with low engagement. They had a recency of 0.6 days and a frequency of 1.0, suggesting low levels of activity. Additionally, customers in this segment spent a low average of $13.97.
+
+# Loyal Customers: This group consisted of 458 customers with a recency score of 79.66, indicating purchases being made less recently. However, this group had a high frequency of 9.6 purchases, demonstrating a consistent purchasing pattern. Additionally, this group had a high monetary score of $191.31, showcasing the solid purchasing habits despite having made less recent purchases.
+
+# Potential Loyal Customers: There were 269 customers in this group, characterized by past high spending ($130.08 average) but a low recency (132.75 day average since last purchases). Additionally, this group had a moderate frequency of 2.62 purchases.
+
+# Recent Customers: This group consisted of 876 customers with the highest recency score of 135.35 days since the most recent purchases. Additionally, this group had a low monetary spend of $20.65 and a low frequency of 1.39 purchases.
+
+# Top Customers: This was the largest group in our dataset, containing 1334 customers. This group was characterized by the highest monetary average of $564.18 and the highest frequency of purchases at 26.37 on average. This group has not purchased recently, having an average recency of 94.67 but they still contribute heavily to overall sales.
+
+# Other Customers: This was also a significant chunk of our customers, containing 659 customers. This group had a high average monetary spending of $284.99 and also a moderate frequency of 14.80 purchases. Additionally, this group had a moderate average recency in comparison to the other groups, demonstrating an average of 86.20 days since their last purchase.
+
+KMeans- 
+
+- Scaled the data
+
+- Used the Elbow Method to identify optimal k (There was no identifiable elbow so I then transitioned to using silhouette scores)
+
+- Used silhouette scores to solidify the optimal k for our model
+
+- Ran KMeans algorithm
+
+- Identified the centroids
+
+- Utilized PCA to visualize the clusters
+
+- Analyzed customer behavior based on the natural groupings in the data
+
+- Provided suggestions for each customer group based on their purchasing behavior
